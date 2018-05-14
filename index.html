@@ -53,7 +53,7 @@ document.getElementById("convert").addEventListener("click", function(){
     var txt = document.getElementById("txt").value;
 
     var regex = /([a-zA-Z])/gm;
-    var converted_txt = txt.replace(regex, ':hacker_$1: ').toLowerCase();
+    var converted_txt = txt.replace(/ /g, '     ').replace(regex, ':hacker_$1: ').toLowerCase();
 
     document.getElementById("converted-txt").value = converted_txt;
   }
