@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
   <title>Txt to Hackertype Converter</title>
   <style type="text/css">
-    #wrapper {
+    #wrapper, #wrapper-secret {
       max-width: 700px;
       margin: auto;
       text-align: center;
+    }
+
+    #wrapper-secret {
+      display: none;
     }
 
     header {
@@ -28,6 +33,14 @@
       resize:vertical;
     }
 
+    #secret {
+      cursor: pointer;
+      width: 30px;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -46,6 +59,22 @@
 
 </div>
 
+<div id ="wrapper-secret">
+
+  <header><h1>TXT 2 <img src="lemongrab.png"> CONVERTER</h1></header>
+
+  (cobbled together for <a href="https://post.lurk.org/">post.lurk.org</a>)
+
+  <textarea maxlength="50" id="txt-lemongrab" onfocus="if(this.value=='Enter your text here') this.value='';" >Enter your text here</textarea>
+
+  <button type="button" id="convert-lemongrab">convert</button>
+
+  <textarea maxlength="50" onclick="this.focus();this.select()" readonly="readonly" id="converted-txt-lemongrab">Your converted text will appear here</textarea>
+
+</div>
+
+<img src="lemongrab.png" id="secret" />
+
 </body>
 <script type="text/javascript">
 
@@ -57,6 +86,29 @@ document.getElementById("convert").addEventListener("click", function(){
     var converted_txt = txt.replace(/ /g, '     ').replace(regex, ':hacker_$1: ').toLowerCase();
 
     document.getElementById("converted-txt").value = converted_txt;
+  }
+});
+
+document.getElementById("convert-lemongrab").addEventListener("click", function(){ 
+  if ( document.getElementById("txt").value != 'Enter your text here') {
+    var txt = document.getElementById("txt-lemongrab").value;
+
+    var regex = /[a-zA-Z]/gm;
+    var converted_txt = txt.replace(/ /g, '     ').replace(regex, ':unacceptable: ').toLowerCase();
+
+    document.getElementById("converted-txt-lemongrab").value = converted_txt;
+  }
+});
+
+document.getElementById("secret").addEventListener("click", function(){
+  if ( document.getElementById("wrapper").style.display != 'none' ) {
+    document.getElementById("wrapper").style.display = 'none';
+    document.getElementById("wrapper-secret").style.display = 'block';
+    this.src = 'h.png';
+  } else {
+    document.getElementById("wrapper").style.display = 'block';
+    document.getElementById("wrapper-secret").style.display = 'none';    
+    this.src = 'lemongrab.png';
   }
 });
 
